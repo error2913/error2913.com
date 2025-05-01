@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>错误の月台</title>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- 加载动画 -->
+    <div class="loader">
+        <div class="loader__spinner"></div>
+    </div>
+
+    <!-- 页面头部 -->
+    <header class="header">
+        <div class="avatar">
+            <img src="https://q1.qlogo.cn/g?b=qq&nk=2913949387&s=640" alt="头像">
+        </div>
+        <h1 class="header__title">错误の月台</h1>
+        <p class="header__subtitle">请出示车票</p>
+    </header>
+
+    <!-- 主体内容 -->
+    <main class="main-content">
+        <!-- 关于我模块 -->
+        <section class="category">
+            <h2 class="category__title">关于我</h2>
+            <div class="card-grid">
+                <a href="https://blog.error2913.com" target="_blank" class="card card--link">
+                    <img src="https://q1.qlogo.cn/g?b=qq&nk=2913949387&s=640" alt="个人博客">
+                    <span>个人博客</span>
+                </a>
+                <a href="https://github.com/error2913" target="_blank" class="card card--link">
+                    <img src="https://github.com/error2913.png" alt="个人GitHub主页">
+                    <span>个人GitHub主页</span>
+                </a>
+                <!-- 更多链接卡片... -->
+            </div>
+        </section>
+
+        <!-- 骰娘模块 -->
+        <section class="category">
+            <h2 class="category__title">骰娘</h2>
+            <div class="card-grid">
+                <article class="card card--profile" data-qq="748569109">
+                    <img src="https://q1.qlogo.cn/g?b=qq&nk=748569109&s=640" alt="骰娘头像">
+                    <div>
+                        <div class="name">正确</div>
+                        <p class="qq">QQ: 748569109</p>
+                        <p class="bio">错误的OC骰</p>
+                    </div>
+                </article>
+                <article class="card card--profile" data-qq="3791258100">
+                    <img src="https://q1.qlogo.cn/g?b=qq&nk=3791258100&s=640" alt="骰娘头像">
+                    <div>
+                        <div class="name">满穗</div>
+                        <p class="qq">QQ: 3791258100</p>
+                        <p class="bio">《饿殍·明末千里行》同人骰</p>
+                    </div>
+                </article>
+                <article class="card card--profile" data-qq="3837233349">
+                    <img src="https://q1.qlogo.cn/g?b=qq&nk=3837233349&s=640" alt="骰娘头像">
+                    <div>
+                        <div class="name">Fairy</div>
+                        <p class="qq">QQ: 3837233349</p>
+                        <p class="bio">《绝区零》同人骰</p>
+                    </div>
+                </article>
+                <!-- 更多骰娘卡片... -->
+            </div>
+        </section>
+    </main>
+
+    <!-- 操作按钮组 -->
+    <div class="action-buttons">
+        <button id="themeToggle" class="button button--icon" title="切换主题">
+            <i class="fas fa-moon"></i>
+        </button>
+        <button id="backToTop" class="button button--icon" title="返回顶部">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <p>© 2023 错误の月台 | 更新于 <span id="update-date"></span></p>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>
