@@ -15,6 +15,19 @@ document.addEventListener('click', (e) => {
     }
 });
 
+// 访客计数器
+function getCounter() {
+    let count = localStorage.getItem("counter");
+    if (!count) {
+        count = 0;
+    }
+    count = parseInt(count) + 1;
+    localStorage.setItem("counter", count);
+    return count;
+}
+
+document.getElementById("visitorCount").textContent = getCounter();
+
 // 复制功能
 async function copyToClipboard(text) {
     try {
