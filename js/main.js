@@ -5,13 +5,13 @@ window.addEventListener('load', () => {
 
 // 点击事件处理
 document.addEventListener('click', (e) => {
-    const cardProfile = e.target.closest('.card--profile')
-    if (cardProfile) {
-        const qqNumber = cardProfile.getAttribute('data-qq');
-        if (!qqNumber) {
+    const card = e.target.closest('.card')
+    if (card) {
+        const text = card.getAttribute('text');
+        if (!text) {
             return;
         }
-        copyToClipboard(qqNumber);
+        copyToClipboard(text);
     }
 });
 
@@ -20,7 +20,7 @@ async function copyToClipboard(text) {
     try {
         if (navigator.clipboard) {
             await navigator.clipboard.writeText(text);
-            showToast(`已复制QQ号: ${text}`);
+            showToast(`已复制文本: ${text}`);
         } else {
             const textarea = document.createElement('textarea');
             textarea.value = text;
@@ -30,14 +30,14 @@ async function copyToClipboard(text) {
             textarea.select();
             const successful = document.execCommand('copy');
             if (successful) {
-                showToast(`已复制QQ号: ${text}`); 
+                showToast(`已复制文本: ${text}`); 
             } else {
-                showToast('复制失败，请手动复制'); 
+                showToast('复制失败'); 
             }
             document.body.removeChild(textarea);
         }
     } catch (err) {
-        showToast('复制失败，请手动复制');
+        showToast('复制失败');
     }
 }
 

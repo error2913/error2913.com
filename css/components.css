@@ -41,7 +41,7 @@
 /* 卡片组件 */
 .card-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
     justify-content: center;
     justify-items: center;
     gap: 15px;
@@ -49,6 +49,7 @@
 }
 
 .card {
+    width: 80px;
     border-radius: 5px;
     padding: 15px;
     transition: all 0.3s ease;
@@ -85,9 +86,12 @@
 .card--profile {
     display: grid;
     grid-template-columns: auto 1fr;
+    grid-column: span 2;
     gap: 15px;
     align-items: center;
     text-align: center;
+    background-color: var(--card-hover-bg);
+    width: 170px;
 }
 
 .card--profile .name {
@@ -150,10 +154,6 @@
 
 /* 响应式设计 */
 @media (max-width: 768px) {
-    .card-grid {
-        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-    }
-
     .button--icon {
         width: 45px;
         height: 45px;
