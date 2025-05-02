@@ -15,19 +15,7 @@ document.addEventListener('click', (e) => {
     }
 });
 
-// 访客计数器
-function getCounter() {
-    let count = localStorage.getItem("counter");
-    if (!count) {
-        count = 0;
-    }
-    count = parseInt(count) + 1;
-    localStorage.setItem("counter", count);
-    return count;
-}
-
-document.getElementById("visitorCount").textContent = getCounter();
-
+// 卡片折叠功能
 document.addEventListener("DOMContentLoaded", () => {
     const titles = document.querySelectorAll(".category__title");
 
