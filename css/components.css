@@ -44,9 +44,10 @@
     grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
     justify-content: center;
     justify-items: center;
+    padding: 10px 0;
     gap: 15px;
     overflow: hidden;
-    transition: max-height 0.3s ease;
+    transition: max-height 0.3s ease, padding 0.7s ease;
     max-height: 3000px;
 }
 

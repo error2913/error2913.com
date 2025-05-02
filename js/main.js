@@ -26,18 +26,25 @@ document.addEventListener("DOMContentLoaded", () => {
         title.addEventListener("click", () => {
             if (cardGrid.style.maxHeight) {
                 cardGrid.style.maxHeight = cardGrid.dataset.originalHeight + "px";
+                cardGrid.style.padding = "";
                 let hasUnfolded = false;
                 cardGrid.addEventListener("transitionend", () => {
                     if (!hasUnfolded) {
-                        cardGrid.style.maxHeight = "";
-                        hasUnfolded = true; 
+                        cardGrid.style.maxHeight = ""; // 恢复默认高度
+                        hasUnfolded = true;
                     }
                 })
             } else {
                 cardGrid.dataset.originalHeight = cardGrid.scrollHeight;
-                cardGrid.style.maxHeight = cardGrid.dataset.originalHeight + "px";
-                void cardGrid.offsetHeight; // 触发重绘
-                cardGrid.style.maxHeight = "0";
+                cardGrid.style.maxHeight = cardGrid.dataset.originalHeight + "px"; // 折叠前设置当前高度
+                let hasSetMaxHeight = false;
+                cardGrid.addEventListener("transitionend", () => {
+                    if (!hasSetMaxHeight) {
+                        cardGrid.style.maxHeight = "0"; // 折叠
+                        cardGrid.style.padding = "0";
+                        hasSetMaxHeight = true;
+                    }
+                })
             }
         });
     });
