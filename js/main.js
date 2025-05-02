@@ -28,6 +28,33 @@ function getCounter() {
 
 document.getElementById("visitorCount").textContent = getCounter();
 
+document.addEventListener("DOMContentLoaded", () => {
+    const titles = document.querySelectorAll(".category__title");
+
+    titles.forEach(title => {
+        const cardGrid = title.nextElementSibling;
+        cardGrid.dataset.originalHeight = cardGrid.scrollHeight;
+
+        title.addEventListener("click", () => {
+            if (cardGrid.style.maxHeight) {
+                cardGrid.style.maxHeight = cardGrid.dataset.originalHeight + "px";
+                let hasUnfolded = false;
+                cardGrid.addEventListener("transitionend", () => {
+                    if (!hasUnfolded) {
+                        cardGrid.style.maxHeight = "";
+                        hasUnfolded = true; 
+                    }
+                })
+            } else {
+                cardGrid.dataset.originalHeight = cardGrid.scrollHeight;
+                cardGrid.style.maxHeight = cardGrid.dataset.originalHeight + "px";
+                void cardGrid.offsetHeight; // 触发重绘
+                cardGrid.style.maxHeight = "0";
+            }
+        });
+    });
+});
+
 // 复制功能
 async function copyToClipboard(text) {
     try {
@@ -43,9 +70,9 @@ async function copyToClipboard(text) {
             textarea.select();
             const successful = document.execCommand('copy');
             if (successful) {
-                showToast(`已复制文本: ${text}`); 
+                showToast(`已复制文本: ${text}`);
             } else {
-                showToast('复制失败'); 
+                showToast('复制失败');
             }
             document.body.removeChild(textarea);
         }
