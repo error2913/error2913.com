@@ -1,0 +1,691 @@
+/* ============================================================
+   新增功能组件：侧边导航 / 开源项目 / 作品集 / 博客 /
+   活动日历 / 教程 / 音乐播放器 / GitHub 动态
+   ============================================================ */
+
+html {
+    scroll-behavior: smooth;
+}
+
+section[id] {
+    scroll-margin-top: 20px;
+}
+
+/* ---------- 侧边导航 ---------- */
+.side-nav {
+    position: fixed;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 900;
+}
+
+.side-nav__toggle {
+    position: relative;
+    z-index: 2;
+}
+
+.side-nav__panel {
+    position: absolute;
+    left: 62px;
+    top: 0;
+    width: 190px;
+    max-width: calc(100vw - 100px);
+    max-height: 80vh;
+    overflow-y: auto;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    padding: 8px 0;
+    opacity: 0;
+    transform: translateX(-10px);
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.side-nav--open .side-nav__panel {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+}
+
+.side-nav__panel ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.side-nav__panel a {
+    display: block;
+    padding: 9px 16px;
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 0.9em;
+    border-left: 3px solid transparent;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.side-nav__panel a:hover,
+.side-nav__panel a.active {
+    background: var(--card-hover-bg);
+    border-left-color: var(--primary-color);
+}
+
+/* ---------- 开源项目卡片 ---------- */
+.project-grid {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    justify-items: stretch;
+}
+
+.card--project {
+    width: auto;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 16px;
+    background: var(--card-hover-bg);
+    border-radius: 8px;
+}
+
+.card--project .project-card__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+}
+
+.project-card__name {
+    font-weight: bold;
+    font-size: 0.95em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.project-card__name i {
+    margin-right: 6px;
+    color: var(--secondary-color);
+}
+
+.project-card__stars {
+    flex-shrink: 0;
+    font-size: 0.78em;
+    color: #b8860b;
+    background: rgba(241, 196, 15, 0.18);
+    padding: 2px 8px;
+    border-radius: 12px;
+}
+
+.project-card__desc {
+    font-size: 0.85em;
+    color: var(--text-color);
+    opacity: 0.85;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.project-card__lang {
+    font-size: 0.75em;
+    color: var(--secondary-color);
+}
+
+.project-card__lang i {
+    margin-right: 4px;
+}
+
+/* ---------- 作品集 ---------- */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 15px;
+    padding: 10px 0;
+}
+
+.card--gallery {
+    width: auto;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: 0;
+    overflow: hidden;
+    background: var(--card-hover-bg);
+    border-radius: 8px;
+}
+
+.card--gallery img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    border-radius: 0;
+    margin: 0;
+}
+
+.card--gallery .gallery-body {
+    padding: 12px 14px 14px;
+}
+
+.card--gallery h3 {
+    margin: 0 0 6px;
+    font-size: 1em;
+}
+
+.card--gallery p {
+    margin: 0 0 8px;
+    font-size: 0.85em;
+    color: var(--text-color);
+    opacity: 0.85;
+}
+
+.gallery-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.tag {
+    font-size: 0.72em;
+    padding: 2px 8px;
+    border-radius: 10px;
+    background: var(--secondary-color);
+    color: #fff;
+    opacity: 0.9;
+}
+
+body.dark-mode .tag {
+    color: #1a1a1a;
+}
+
+/* ---------- 最新博客 ---------- */
+.blog-list {
+    list-style: none;
+    margin: 0;
+    padding: 10px 0 0;
+}
+
+.blog-list li {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    padding: 10px 4px;
+    border-bottom: 1px dashed var(--border-color);
+}
+
+.blog-list li:last-child {
+    border-bottom: none;
+}
+
+.blog-list time {
+    flex-shrink: 0;
+    font-size: 0.78em;
+    color: #7f8c8d;
+}
+
+.blog-list a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 0.95em;
+}
+
+.blog-list a:hover {
+    color: var(--secondary-color);
+}
+
+.empty-tip {
+    color: #7f8c8d;
+    font-size: 0.9em;
+    padding: 10px 4px;
+    margin: 0;
+}
+
+/* ---------- 活动日历与高峰时段 ---------- */
+.calendar-wrap {
+    padding: 10px 0;
+    display: grid;
+    gap: 20px;
+}
+
+.calendar-block h3 {
+    margin: 0 0 10px;
+    font-size: 0.95em;
+    color: var(--text-color);
+}
+
+.activity-calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 3px;
+}
+
+.activity-calendar .cal-weekday,
+.activity-calendar .cal-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7em;
+    border-radius: 3px;
+}
+
+.activity-calendar .cal-weekday {
+    color: #7f8c8d;
+    padding-bottom: 4px;
+}
+
+.activity-calendar .cal-cell {
+    aspect-ratio: 1 / 1;
+    background: var(--border-color);
+    color: var(--text-color);
+}
+
+.activity-calendar .cal-cell.blank {
+    background: transparent;
+}
+
+.activity-calendar .cal-cell.today {
+    outline: 2px solid var(--primary-color);
+}
+
+.activity-calendar .cal-cell.lv1,
+.legend-cell.lv1 {
+    background: rgba(52, 152, 219, 0.22);
+}
+
+.activity-calendar .cal-cell.lv2,
+.legend-cell.lv2 {
+    background: rgba(52, 152, 219, 0.45);
+}
+
+.activity-calendar .cal-cell.lv3,
+.legend-cell.lv3 {
+    background: rgba(52, 152, 219, 0.7);
+}
+
+.activity-calendar .cal-cell.lv4,
+.legend-cell.lv4 {
+    background: rgba(52, 152, 219, 0.95);
+}
+
+.calendar-legend {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 10px;
+    font-size: 0.72em;
+    color: #7f8c8d;
+}
+
+.legend-cell {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+    display: inline-block;
+}
+
+.hour-heatmap {
+    display: grid;
+    gap: 3px;
+}
+
+.hour-axis {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 36px;
+    padding: 0 2px;
+}
+
+.hour-axis b {
+    font-weight: normal;
+    font-size: 0.62em;
+    color: #7f8c8d;
+}
+
+.hour-row {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.hour-row .hour-row-label {
+    width: 34px;
+    flex-shrink: 0;
+    font-size: 0.7em;
+    color: #7f8c8d;
+}
+
+.hour-row .cell {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+    background: var(--border-color);
+    transition: transform 0.15s ease;
+}
+
+.hour-row .cell:hover {
+    transform: scale(1.3);
+}
+
+.hour-row .cell.lv1 {
+    background: rgba(52, 152, 219, 0.22);
+}
+
+.hour-row .cell.lv2 {
+    background: rgba(52, 152, 219, 0.45);
+}
+
+.hour-row .cell.lv3 {
+    background: rgba(52, 152, 219, 0.7);
+}
+
+.hour-row .cell.lv4 {
+    background: rgba(52, 152, 219, 0.95);
+}
+
+.peak-summary {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.peak-chip {
+    font-size: 0.78em;
+    padding: 4px 10px;
+    border-radius: 12px;
+    background: var(--card-hover-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+}
+
+.peak-chip b {
+    color: var(--primary-color);
+}
+
+.calendar-note {
+    font-size: 0.78em;
+    color: #7f8c8d;
+    margin: 0;
+}
+
+.calendar-note code {
+    background: var(--border-color);
+    padding: 1px 5px;
+    border-radius: 3px;
+}
+
+/* ---------- 骰娘教程 ---------- */
+.tutorial-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 15px;
+    padding: 10px 0;
+}
+
+.card--tutorial {
+    width: auto;
+    text-align: left;
+    background: var(--card-hover-bg);
+    border-radius: 8px;
+}
+
+.card--tutorial h3 {
+    margin: 0 0 8px;
+    font-size: 0.92em;
+}
+
+.card--tutorial h3 code {
+    background: var(--border-color);
+    padding: 2px 8px;
+    border-radius: 4px;
+    color: var(--secondary-color);
+}
+
+.card--tutorial p {
+    margin: 0;
+    font-size: 0.85em;
+    color: var(--text-color);
+    opacity: 0.9;
+}
+
+.card--tutorial p code {
+    font-size: 0.95em;
+    color: var(--secondary-color);
+}
+
+/* ---------- 音乐播放器（左下角迷你悬浮，APlayer） ---------- */
+.music-widget {
+    position: fixed;
+    left: 20px;
+    bottom: 20px;
+    z-index: 800;
+}
+
+.music-widget__fab {
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+    color: #fff;
+    font-size: 1.25em;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.music-widget__fab:hover {
+    transform: scale(1.08);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.music-widget__panel {
+    position: absolute;
+    left: 0;
+    bottom: 60px;
+    width: 340px;
+    max-height: 0;
+    overflow: hidden;
+    visibility: hidden;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-width: 0;
+    border-radius: 8px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    transition: max-height 0.3s ease, border-width 0.3s ease, visibility 0s 0.3s;
+}
+
+.music-widget--expanded .music-widget__panel {
+    max-height: 560px;
+    border-width: 1px;
+    visibility: visible;
+    transition: max-height 0.3s ease, border-width 0.3s ease;
+}
+
+.music-widget__panel-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 10px 8px 10px 14px;
+    background: var(--card-hover-bg);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.music-widget__title {
+    font-size: 0.85em;
+    color: var(--text-color);
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.music-widget__close {
+    flex-shrink: 0;
+    border: none;
+    background: transparent;
+    color: var(--text-color);
+    cursor: pointer;
+    font-size: 0.9em;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+
+.music-widget__close:hover {
+    background: var(--border-color);
+}
+
+.music-widget__player {
+    padding: 10px;
+}
+
+.music-widget__tip {
+    margin: 0;
+    padding: 0 14px 10px;
+    font-size: 0.72em;
+    color: #7f8c8d;
+}
+
+/* APlayer 适配：APlayer 1.10 会把 aplayer 类加到容器自身，
+   因此容器用 .music-widget__player.aplayer，其余用后代选择器 */
+.music-widget__player.aplayer {
+    width: 100% !important;
+    margin: 0;
+    border: none;
+    box-shadow: none;
+    background: var(--card-bg) !important;
+}
+
+.music-widget__player .aplayer-info,
+.music-widget__player .aplayer-list {
+    background: var(--card-bg) !important;
+    border-color: var(--border-color);
+}
+
+.music-widget__player .aplayer-info .aplayer-music .aplayer-title,
+.music-widget__player .aplayer-list ol li {
+    color: var(--text-color) !important;
+}
+
+.music-widget__player .aplayer-info .aplayer-music .aplayer-author,
+.music-widget__player .aplayer-info .aplayer-controller .aplayer-time,
+.music-widget__player .aplayer-list ol li .aplayer-list-index,
+.music-widget__player .aplayer-list ol li .aplayer-list-author {
+    color: #7f8c8d;
+}
+
+.music-widget__player .aplayer-list {
+    max-height: 320px;
+    border-color: var(--border-color);
+}
+
+.music-widget__player .aplayer-list ol li {
+    border-color: var(--border-color);
+}
+
+.music-widget__player .aplayer-list ol li:hover,
+.music-widget__player .aplayer-list ol li.aplayer-list-light {
+    background: var(--card-hover-bg);
+}
+
+.music-widget__player .aplayer-info .aplayer-controller .aplayer-bar-wrap .aplayer-bar,
+.music-widget__player .aplayer-info .aplayer-controller .aplayer-volume-wrap .aplayer-volume-bar {
+    background: var(--border-color);
+}
+
+.music-widget__player .aplayer-info .aplayer-controller .aplayer-bar-wrap .aplayer-bar .aplayer-loaded {
+    background: #888;
+}
+
+.music-widget__player .aplayer-list ol::-webkit-scrollbar-thumb {
+    background-color: var(--border-color);
+}
+
+.music-widget__player .aplayer-list ol::-webkit-scrollbar-thumb:hover {
+    background-color: #888;
+}
+
+/* ---------- GitHub 动态 ---------- */
+.activity-list {
+    list-style: none;
+    margin: 0;
+    padding: 10px 0 0;
+    display: grid;
+    gap: 10px;
+}
+
+.activity-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 10px 12px;
+    background: var(--card-hover-bg);
+    border-radius: 8px;
+}
+
+.activity-item > i {
+    margin-top: 3px;
+    color: var(--secondary-color);
+    font-size: 1.1em;
+}
+
+.activity-item__body {
+    min-width: 0;
+}
+
+.activity-item__body a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+.activity-item__body a:hover {
+    color: var(--secondary-color);
+}
+
+.activity-item__body p {
+    margin: 4px 0;
+    font-size: 0.85em;
+    color: var(--text-color);
+    opacity: 0.85;
+    overflow-wrap: anywhere;
+}
+
+.activity-item__body time {
+    font-size: 0.75em;
+    color: #7f8c8d;
+}
+
+/* ---------- 响应式 ---------- */
+@media (max-width: 768px) {
+    .side-nav {
+        left: 12px;
+    }
+
+    .music-widget {
+        left: 12px;
+        bottom: 12px;
+    }
+
+    .music-widget__panel {
+        width: calc(100vw - 24px);
+        max-width: 340px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hour-row .cell {
+        width: 9px;
+        height: 9px;
+    }
+}

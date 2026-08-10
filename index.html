@@ -9,13 +9,34 @@
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/layout.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-3B6NwesSXE7YJlcLI9RpRqGf2p/EgVH8BgoKTaUrmKNDkHPStTQ3EyoYjCGXaOTS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.css" integrity="sha384-tLMkTWh2pfXNWGFlUS0w1TFtRG5xZ9lPWFOooj+vDDLIL+xBGQU/voDBY5XE2lVh" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/features.css">
 </head>
 
 <body>
     <!-- 加载动画 -->
     <div class="loader">
         <div class="loader__spinner"></div>
+    </div>
+
+    <!-- 侧边导航 -->
+    <div class="side-nav" id="sideNav">
+        <button id="navToggle" class="button button--icon side-nav__toggle" aria-label="展开导航菜单" aria-expanded="false" title="导航菜单">
+            <i class="fas fa-bars"></i>
+        </button>
+        <nav class="side-nav__panel" aria-label="页面导航">
+            <ul>
+                <li><a href="#about" data-section="about">关于我</a></li>
+                <li><a href="#dice" data-section="dice">骰娘</a></li>
+                <li><a href="#projects" data-section="projects">开源项目</a></li>
+                <li><a href="#gallery" data-section="gallery">作品集</a></li>
+                <li><a href="#blog" data-section="blog">最新博客</a></li>
+                <li><a href="#calendar" data-section="calendar">活动日历</a></li>
+                <li><a href="#tutorial" data-section="tutorial">骰娘教程</a></li>
+                <li><a href="#activity" data-section="activity">GitHub动态</a></li>
+            </ul>
+        </nav>
     </div>
 
     <!-- 页面头部 -->
@@ -32,14 +53,14 @@
     <!-- 主体内容 -->
     <main class="main-content">
         <!-- 关于我模块 -->
-        <section class="category">
+        <section class="category" id="about">
             <h2 class="category__title">关于我</h2>
             <div class="card-grid">
-                <a href="https://blog.error2913.com" target="_blank" class="card card--link">
+                <a href="https://blog.error2913.com" target="_blank" rel="noopener" class="card card--link">
                     <i class="icon fas fa-blog" style="color: var(--secondary-color)"></i>
                     <span>博客</span>
                 </a>
-                <a href="https://github.com/error2913" target="_blank" class="card card--link">
+                <a href="https://github.com/error2913" target="_blank" rel="noopener" class="card card--link">
                     <i class="icon fab fa-github"></i>
                     <span>GitHub主页</span>
                 </a>
@@ -56,7 +77,7 @@
         </section>
 
         <!-- 骰娘模块 -->
-        <section class="category">
+        <section class="category" id="dice">
             <h2 class="category__title">骰娘</h2>
             <div class="card-grid">
                 <article class="card card--profile" text="748569109">
@@ -86,7 +107,111 @@
                 <!-- 更多骰娘卡片... -->
             </div>
         </section>
+
+        <!-- 开源项目模块 -->
+        <section class="category" id="projects">
+            <h2 class="category__title">开源项目</h2>
+            <div class="card-grid project-grid" id="projectGrid"></div>
+        </section>
+
+        <!-- 作品集模块 -->
+        <section class="category" id="gallery">
+            <h2 class="category__title">作品集</h2>
+            <div class="gallery-grid" id="galleryGrid"></div>
+        </section>
+
+        <!-- 最新博客模块 -->
+        <section class="category" id="blog">
+            <h2 class="category__title">最新博客</h2>
+            <ul class="blog-list" id="blogList"></ul>
+        </section>
+
+        <!-- 页面活动日历模块 -->
+        <section class="category" id="calendar">
+            <h2 class="category__title">页面活动日历</h2>
+            <div class="calendar-wrap">
+                <div class="calendar-block">
+                    <h3>本月活动热力日历</h3>
+                    <div id="activityCalendar" class="activity-calendar"></div>
+                    <div class="calendar-legend">
+                        <span>少</span>
+                        <i class="legend-cell lv1"></i>
+                        <i class="legend-cell lv2"></i>
+                        <i class="legend-cell lv3"></i>
+                        <i class="legend-cell lv4"></i>
+                        <span>多</span>
+                    </div>
+                </div>
+                <div class="calendar-block">
+                    <h3>骰娘使用高峰时段</h3>
+                    <div id="peakHours" class="peak-hours"></div>
+                </div>
+                <p class="calendar-note">当前为演示数据：接入骰娘日志/统计接口后，将 <code>USE_DEMO_DATA</code> 改为 <code>false</code> 即可展示真实数据。</p>
+            </div>
+        </section>
+
+        <!-- 骰娘教程模块 -->
+        <section class="category" id="tutorial">
+            <h2 class="category__title">骰娘使用教程</h2>
+            <div class="tutorial-grid">
+                <article class="card card--tutorial">
+                    <h3><code>.r 表达式</code></h3>
+                    <p>标准骰点指令，例如 <code>.r 3d6</code>、<code>.r d100</code>、<code>.r 2d20+5</code>。</p>
+                </article>
+                <article class="card card--tutorial">
+                    <h3><code>.d 表达式</code></h3>
+                    <p>骰点快捷别名，例如 <code>.d100</code> 等价于 <code>.r d100</code>。</p>
+                </article>
+                <article class="card card--tutorial">
+                    <h3><code>.rh / .rl</code></h3>
+                    <p>优势骰 / 劣势骰：<code>.rh d20</code> 取两次骰点较高者，<code>.rl d20</code> 取较低者。</p>
+                </article>
+                <article class="card card--tutorial">
+                    <h3><code>.st 属性</code></h3>
+                    <p>属性判定，例如 <code>.st 力量</code>；也支持 <code>.st 敏捷+1</code> 修改属性。</p>
+                </article>
+                <article class="card card--tutorial">
+                    <h3><code>.pc</code></h3>
+                    <p>查看当前角色属性卡。</p>
+                </article>
+                <article class="card card--tutorial">
+                    <h3><code>.draw 牌堆</code></h3>
+                    <p>抽取牌堆，例如 <code>.draw 邂逅</code>，适合随机事件、奖励表等场景。</p>
+                </article>
+                <article class="card card--tutorial">
+                    <h3><code>.help</code></h3>
+                    <p>查看骰娘的完整指令列表与扩展插件指令。</p>
+                </article>
+                <article class="card card--tutorial">
+                    <h3>邀请骰娘进群</h3>
+                    <p>在 QQ 搜索骰娘号码添加好友，或直接在群里 @骰娘 即可开始互动。</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- GitHub 动态模块 -->
+        <section class="category" id="activity">
+            <h2 class="category__title">GitHub动态</h2>
+            <ul class="activity-list" id="activityList"></ul>
+        </section>
     </main>
+
+    <!-- 音乐播放器（左下角迷你悬浮） -->
+    <div class="music-widget" id="music">
+        <button id="musicToggle" class="music-widget__fab" aria-label="打开音乐播放器" aria-expanded="false" title="音乐播放器">
+            <i class="fas fa-music"></i>
+        </button>
+        <div class="music-widget__panel">
+            <div class="music-widget__panel-head">
+                <span class="music-widget__title" id="musicTitle">音乐播放器</span>
+                <button id="musicClose" class="music-widget__close" aria-label="收起播放器" title="收起播放器（音乐继续播放）">
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+            <div class="music-widget__player" id="musicPlayer"></div>
+            <p class="music-widget__tip">网易云歌单 · 数据来自公开音乐接口</p>
+        </div>
+    </div>
 
     <!-- 操作按钮组 -->
     <div class="action-buttons">
@@ -103,6 +228,8 @@
         <p>© 2023 错误の月台 | 更新于 <span id="update-date"></span></p>
     </footer>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aplayer/1.10.1/APlayer.min.js" integrity="sha512-RWosNnDNw8FxHibJqdFRySIswOUgYhFxnmYO3fp+BgCU7gfo4z0oS7mYFBvaa8qu+axY39BmQOrhW3Tp70XbaQ==" crossorigin="anonymous"></script>
+    <script src="js/config.js"></script>
     <script src="js/main.js"></script>
 </body>
 
